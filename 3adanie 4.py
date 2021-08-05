@@ -24,12 +24,18 @@ class Student:
                 crutch_2.append(search_2)
         return float(crutch / len(crutch_2))
 
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            return self.average_rating() < other.average_rating()
+        else:
+            return "Ошибка"
+
     def rating_comparison(self, student):
         if isinstance(student, Student):
-            if self.average_rating() > student.average_rating():
-                return f"{self.name}{self.surname}"
-            elif self.average_rating() < student.average_rating():
-                return f"{student.name}{student.surname}"
+            if student < self:
+                return f"{self.name} {self.surname}"
+            elif self < student:
+                return f"{student.name} {student.surname}"
             else:
                 return "средний бал равен"
         else:
@@ -72,12 +78,18 @@ class Lecturer(Mentor):
             crutch_2.append(search)
         return float(crutch / len(crutch_2))
 
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_rating() < other.average_rating()
+        else:
+            return "Ошибка"
+
     def rating_comparison(self, lecturer):
         if isinstance(lecturer, Lecturer):
-            if self.average_rating() > lecturer.average_rating():
-                return f"{self.name}{self.surname}"
-            elif self.average_rating() < lecturer.average_rating():
-                return f"{lecturer.name}{lecturer.surname}"
+            if lecturer < self:
+                return f"{self.name} {self.surname}"
+            elif self < lecturer:
+                return f"{lecturer.name} {lecturer.surname}"
             else:
                 return "средний бал равен"
         else:

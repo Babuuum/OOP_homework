@@ -16,12 +16,18 @@ class Student:
                 crutch_2.append(search_2)
         return float(crutch / len(crutch_2))
 
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            return self.average_rating() < other.average_rating()
+        else:
+            return "Ошибка"
+
     def rating_comparison(self, student):
         if isinstance(student, Student):
-            if self.average_rating() > student.average_rating():
-                return f"{self.name}{self.surname}"
-            elif self.average_rating() < student.average_rating():
-                return f"{student.name}{student.surname}"
+            if student < self:
+                return f"{self.name} {self.surname}"
+            elif self < student:
+                return f"{student.name} {student.surname}"
             else:
                 return "средний бал равен"
         else:
@@ -55,13 +61,19 @@ class Lecturer(Mentor):
                 crutch += search_2
                 crutch_2.append(search_2)
         return float(crutch / len(crutch_2))
-    
+
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_rating() < other.average_rating()
+        else:
+            return "Ошибка"
+
     def rating_comparison(self, lecturer):
         if isinstance(lecturer, Lecturer):
-            if self.average_rating() > lecturer.average_rating():
-                return f"{self.name}{self.surname}"
-            elif self.average_rating() < student.average_rating():
-                return f"{lecturer.name}{lecturer.surname}"
+            if lecturer < self:
+                return f"{self.name} {self.surname}"
+            elif self < lecturer:
+                return f"{lecturer.name} {lecturer.surname}"
             else:
                 return "средний бал равен"
         else:
@@ -110,8 +122,6 @@ some_student.finished_courses = ["Введение в программирова
 some_student.courses_in_progress = ["Python", "Git"]
 some_student.grades = {"Python": [3, 4, 5, 6], "Git": [4]}
 
-
 print(some_reviewer)
 print(some_lecturer)
 print(some_student)
-
